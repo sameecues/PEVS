@@ -4,86 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incidente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Estilos generales minimalistas */
+        /* Definición de Variables CSS para Temas */
+        :root {
+            /* Tema Claro (Por Defecto) */
+            --body-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --primary-text: #1e293b;
+            --secondary-text: #64748b;
+            --card-title-text: #1e3a8a;
+            --accent-color: #0ea5e9;
+            --iframe-placeholder-bg: #f1f5f9;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            --header-border: 1px solid #e2e8f0;
+            
+            /* Ajustes Generales */
+            --border-radius: 12px;
+            --grid-gap: 30px;
+            --main-max-width: 1300px;
+        }
+
+        body.dark-mode {
+            /* Tema Oscuro */
+            --body-bg: #0f172a;
+            --card-bg: #1e293b;
+            --header-bg: #1e293b;
+            --primary-text: #f1f5f9;
+            --secondary-text: #94a3b8;
+            --card-title-text: #3b82f6;
+            --accent-color: #0ea5e9;
+            --iframe-placeholder-bg: #111827;
+            --border-color: #334155;
+            --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            --header-border: none;
+        }
+
+        /* Estilos Generales Modernos */
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: #f4f6f8;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--body-bg);
             margin: 0;
-            padding: 30px 20px;
-            color: #333;
+            color: var(--primary-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
 
-        /* Encabezado del reporte */
+        /* Estilos del Encabezado con Logos y Botón */
         .encabezado {
-            text-align: center;
-            margin-bottom: 40px;
+            background-color: var(--header-bg);
+            border-bottom: var(--header-border);
+            padding: 20px 40px;
+            margin-bottom: 50px;
+            transition: background-color 0.3s ease, border-bottom 0.3s ease;
         }
 
-        .encabezado h1 {
-            margin: 0;
-            color: #1a252f;
-            font-size: 28px;
-            font-weight: 600;
-        }
-
-        .encabezado p {
-            color: #5c6a79;
-            margin-top: 8px;
-            font-size: 15px;
-        }
-
-        /* Cuadrícula para organizar los gráficos */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            max-width: 1200px;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--main-max-width);
             margin: 0 auto;
         }
 
-        /* El mapa ocupa las dos columnas enteras */
-        .mapa-completo {
-            grid-column: 1 / -1; 
+        .logo-title-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        /* Diseño de las tarjetas que contienen los gráficos */
-        .tarjeta {
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        .logo-left,
+        .logo-right {
+            height: 50px; /* Tamaño normal para el encabezado */
+            width: auto;
+        }
+
+        .text-container {
             display: flex;
             flex-direction: column;
         }
 
-        .titulo-tarjeta {
+        .header-content h1 {
+            margin: 0;
+            color: var(--primary-text);
+            font-size: 32px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .header-content p {
+            color: var(--secondary-text);
+            margin-top: 5px;
             font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* Estilos del Botón de Modo */
+        .theme-toggle {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
             font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+
+        /* Cuadrícula del Dashboard */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--grid-gap);
+            max-width: var(--main-max-width);
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+
+        /* El mapa ocupa todo el ancho */
+        .mapa-completo {
+            grid-column: 1 / -1; 
+        }
+
+        /* Diseño Moderno de las Tarjetas */
+        .tarjeta {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            color: var(--primary-text);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .titulo-tarjeta {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--card-title-text);
+            margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #eef0f2;
+            border-bottom: 1px solid var(--border-color);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         /* Ajustes de los iframes */
         iframe {
             width: 100%;
             border: none;
-            border-radius: 4px;
-            background-color: #f9fafb; /* Fondo sutil por si tarda en cargar */
+            border-radius: 8px;
+            background-color: var(--iframe-placeholder-bg);
+            transition: background-color 0.3s ease;
         }
 
         /* Alturas personalizadas */
-        .iframe-alto { height: 500px; }
-        .iframe-medio { height: 380px; }
+        .iframe-alto { height: 550px; }
+        .iframe-medio { height: 400px; }
 
         /* Adaptabilidad para pantallas pequeñas (celulares) */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .logo-title-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
             .dashboard-grid {
                 grid-template-columns: 1fr;
+                padding: 0 15px 30px;
             }
         }
     </style>
@@ -91,8 +204,21 @@
 <body>
 
     <header class="encabezado">
-        <h1>Incidente</h1>
-        <p>Análisis de Expansión territorial y demografía</p>
+        <div class="header-content">
+            <div class="logo-title-group">
+                <img src="https://i.imgur.com/GXTFolo.png" alt="Logo Izquierda" class="logo-left">
+                <div class="text-container">
+                    <h1>Incidente</h1>
+                    <p>Análisis de Expansión territorial y demografía</p>
+                </div>
+            </div>
+            <div class="toggle-group">
+                <button class="theme-toggle" id="theme-toggle">
+                    Claro / Oscuro
+                </button>
+                <img src="https://i.imgur.com/W5Mo4rc.png" alt="Logo Derecha" class="logo-right">
+            </div>
+        </div>
     </header>
 
     <main class="dashboard-grid">
@@ -113,6 +239,29 @@
         </div>
 
     </main>
+
+    <script>
+        const body = document.body;
+        const themeToggle = document.getElementById('theme-toggle');
+
+        themeToggle.addEventListener('click', () => {
+            // Alternar la clase 'dark-mode' en el body
+            body.classList.toggle('dark-mode');
+
+            // Guardar la preferencia en localStorage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Comprobar localStorage al cargar la página para aplicar el tema guardado
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+    </script>
 
 </body>
 </html>
