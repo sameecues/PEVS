@@ -9,17 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Variables CSS para Temas */
         :root {
-            /* Modo Claro */
+
             --body-bg: #f1f5f9;
             --card-bg: #ffffff;
             --header-bg: rgba(255, 255, 255, 0.85);
             --primary-text: #0f172a;
             --secondary-text: #64748b;
             --card-title-text: #1e293b;
-            --accent-color: #0ea5e9;
-            --accent-gradient: linear-gradient(135deg, #2563eb, #0ea5e9);
+            
+            --accent-color: #06b6d4; /* Turquesa */
+            --accent-gradient: linear-gradient(135deg, #8b5cf6, #06b6d4); /* Violeta a Turquesa */
+            
             --iframe-placeholder-bg: #f8fafc;
             --border-color: #e2e8f0;
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
@@ -38,15 +39,16 @@
             --primary-text: #f8fafc;
             --secondary-text: #94a3b8;
             --card-title-text: #e2e8f0;
-            --accent-color: #38bdf8;
-            --accent-gradient: linear-gradient(135deg, #60a5fa, #38bdf8);
+            
+            --accent-color: #22d3ee; 
+            --accent-gradient: linear-gradient(135deg, #a78bfa, #22d3ee);
+            
             --iframe-placeholder-bg: #0f172a;
             --border-color: #334155;
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
             --card-hover-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
         }
 
-        /* Scrollbar Personalizado */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--body-bg); }
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
@@ -228,7 +230,6 @@
         @media (max-width: 900px) {
             .encabezado { padding: 15px 20px; }
             
-            /* Reorganización del Header para móvil */
             .header-content { 
                 grid-template-columns: 1fr 1fr; 
                 grid-template-rows: auto auto;
@@ -258,7 +259,8 @@
         <div class="header-content">
             
             <div class="header-left">
-                <img src="https://i.imgur.com/GXTFolo.png" alt="Logo Izquierda" class="logo-left">
+                <!-- Reemplaza el src con la ruta real de tu logo izquierdo -->
+                <img src="https://i.imgur.com/GXTFolo.png" alt="Logo Institución" class="logo-left">
             </div>
 
             <div class="header-center">
@@ -271,7 +273,7 @@
                     <svg id="icon-sun" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
-                <img src="https://i.imgur.com/W5Mo4rc.png" alt="Logo Derecha" class="logo-right">
+                <img src="https://i.imgur.com/W5Mo4rc.png" alt="Logo Entidad" class="logo-right">
             </div>
 
         </div>
@@ -294,7 +296,7 @@
 
         <div class="tarjeta">
             <div class="titulo-tarjeta">
-                <span class="titulo-icon">📈</span> Tercer Gráfico
+                <span class="titulo-icon">📈</span> Tendencias y Métricas
             </div>
             <iframe class="iframe-medio" src="graficos/tercer_grafico.html" title="Tercer Gráfico"></iframe>
         </div>
