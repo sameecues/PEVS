@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* Variables CSS para Temas */
         :root {
             --body-bg: #f8fafc;
             --card-bg: #ffffff;
@@ -59,16 +60,29 @@
             transition: background-color 0.3s ease, border-bottom 0.3s ease;
         }
 
+        /* === NUEVA ESTRUCTURA DEL ENCABEZADO === */
         .header-content {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr; /* Divide en 3 columnas */
             align-items: center;
             max-width: var(--main-max-width);
             margin: 0 auto;
         }
 
-        .logo-title-group {
+        .header-left {
             display: flex;
+            justify-content: flex-start;
+        }
+
+        .header-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-right {
+            display: flex;
+            justify-content: flex-end;
             align-items: center;
             gap: 20px;
         }
@@ -78,9 +92,7 @@
             width: auto;
         }
 
-        .text-container { display: flex; flex-direction: column; }
-
-        .header-content h1 {
+        .header-center h1 {
             margin: 0;
             color: var(--primary-text);
             font-size: 32px;
@@ -88,20 +100,14 @@
             transition: color 0.3s ease;
         }
 
-        .header-content p {
+        .header-center p {
             color: var(--secondary-text);
             margin-top: 5px;
             font-size: 16px;
             transition: color 0.3s ease;
         }
 
-        .toggle-group {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        /* === NUEVO BOTÓN REDONDO DE TEMA === */
+        /* Botón de Tema */
         .btn-theme-toggle {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -172,9 +178,16 @@
         .iframe-alto { height: 550px; }
         .iframe-medio { height: 400px; }
 
+        /* Adaptabilidad para móviles */
         @media (max-width: 900px) {
-            .header-content { flex-direction: column; gap: 20px; text-align: center; }
-            .logo-title-group { flex-direction: column; gap: 10px; }
+            .header-content { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px; 
+            }
+            .header-left, .header-right {
+                justify-content: center;
+            }
             .dashboard-grid { grid-template-columns: 1fr; padding: 0 15px 30px; }
         }
     </style>
@@ -183,32 +196,35 @@
 
     <header class="encabezado">
         <div class="header-content">
-            <div class="logo-title-group">
+            
+            <div class="header-left">
                 <img src="https://i.imgur.com/GXTFolo.png" alt="Logo Izquierda" class="logo-left">
-                <div class="text-container">
-                    <h1>Incidente</h1>
-                    <p>Análisis de Expansión territorial y demografía</p>
-                </div>
             </div>
-            <div class="toggle-group">
+
+            <div class="header-center">
+                <h1>Incidente</h1>
+                <p>Análisis de Expansión territorial y demografía</p>
+            </div>
+
+            <div class="header-right">
                 <button id="theme-toggle" class="btn-theme-toggle" aria-label="Cambiar tema" title="Modo Claro / Oscuro">
                     <svg id="icon-sun" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
-
                 <img src="https://i.imgur.com/W5Mo4rc.png" alt="Logo Derecha" class="logo-right">
             </div>
+
         </div>
     </header>
 
     <main class="dashboard-grid">
         <div class="tarjeta mapa-completo">
-            <div class="titulo-tarjeta">📍 Mapa Interactivo</div>
+            <div class="titulo-tarjeta">🗺️ Mapa Interactivo</div>
             <iframe class="iframe-alto" src="graficos/mapa.html" title="Mapa de Incidentes"></iframe>
         </div>
 
         <div class="tarjeta">
-            <div class="titulo-tarjeta">📊 Perfil demográfico</div>
+            <div class="titulo-tarjeta">📊 Perfil Demográfico</div>
             <iframe class="iframe-medio" src="graficos/grafico_sexo.html" title="Distribución por Sexo"></iframe>
         </div>
 
@@ -223,6 +239,7 @@
         const themeToggle = document.getElementById('theme-toggle');
         const iconSun = document.getElementById('icon-sun');
         const iconMoon = document.getElementById('icon-moon');
+
         function updateIcons() {
             if (body.classList.contains('dark-mode')) {
                 iconSun.style.display = 'block';
@@ -232,12 +249,12 @@
                 iconMoon.style.display = 'block';
             }
         }
-        
+
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             body.classList.add('dark-mode');
-        }   
-
+        }
+        
         updateIcons();
 
         themeToggle.addEventListener('click', () => {
