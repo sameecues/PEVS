@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incidentes</title>
+    <title>Incidente</title>
     <style>
         /* Estilos generales minimalistas */
         body {
@@ -36,14 +36,13 @@
         /* Cuadrícula para organizar los gráficos */
         .dashboard-grid {
             display: grid;
-            /* Crea dos columnas del mismo tamaño */
             grid-template-columns: 1fr 1fr;
             gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Esta clase hace que el mapa ocupe las dos columnas enteras */
+        /* El mapa ocupa las dos columnas enteras */
         .mapa-completo {
             grid-column: 1 / -1; 
         }
@@ -69,11 +68,12 @@
             letter-spacing: 0.5px;
         }
 
-        /* Ajustes de los iframes para que carguen el HTML externo */
+        /* Ajustes de los iframes */
         iframe {
             width: 100%;
             border: none;
             border-radius: 4px;
+            background-color: #f9fafb; /* Fondo sutil por si tarda en cargar */
         }
 
         /* Alturas personalizadas */
@@ -83,7 +83,7 @@
         /* Adaptabilidad para pantallas pequeñas (celulares) */
         @media (max-width: 768px) {
             .dashboard-grid {
-                grid-template-columns: 1fr; /* Pasa a una sola columna */
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -91,7 +91,7 @@
 <body>
 
     <header class="encabezado">
-        <h1>Incidentes</h1>
+        <h1>Incidente</h1>
         <p>Análisis de Expansión territorial y demografía</p>
     </header>
 
@@ -99,17 +99,17 @@
         
         <div class="tarjeta mapa-completo">
             <div class="titulo-tarjeta">🗺️ Mapa Interactivo</div>
-            <iframe class="iframe-alto" src="graficos/mapa.html" title="Mapa de Incidentes"></iframe>
+            <iframe class="iframe-alto" src="situacion/graficos/mapa.html" title="Mapa de Incidentes"></iframe>
         </div>
 
         <div class="tarjeta">
             <div class="titulo-tarjeta">📊 Distribución por Sexo</div>
-            <iframe class="iframe-medio" src="graficos/grafico_sexo.html" title="Distribución por Sexo"></iframe>
+            <iframe class="iframe-medio" src="situacion/graficos/grafico_sexo.html" title="Distribución por Sexo"></iframe>
         </div>
 
         <div class="tarjeta">
             <div class="titulo-tarjeta">📈 Tercer Gráfico</div>
-            <iframe class="iframe-medio" src="graficos/tercer_grafico.html" title="Tercer Gráfico"></iframe>
+            <iframe class="iframe-medio" src="situacion/graficos/tercer_grafico.html" title="Tercer Gráfico"></iframe>
         </div>
 
     </main>
