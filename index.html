@@ -3,119 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Operativo de Incidentes</title>
+    <title>Incidentes</title>
     <style>
-        /* Diseño general minimalista y moderno */
+        /* Estilos generales minimalistas */
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: #f4f7f6;
+            background-color: #f4f6f8;
             margin: 0;
-            padding: 0;
+            padding: 30px 20px;
             color: #333;
         }
 
-        /* Encabezado limpio */
+        /* Encabezado del reporte */
         .encabezado {
-            background-color: #1a252f;
-            color: #ffffff;
-            padding: 25px 20px;
             text-align: center;
+            margin-bottom: 40px;
         }
 
         .encabezado h1 {
             margin: 0;
-            font-size: 1.8rem;
+            color: #1a252f;
+            font-size: 28px;
             font-weight: 600;
-            letter-spacing: 1px;
         }
 
-        /* Contenedor de los 3 botones (pestañas) */
-        .menu-pestanas {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        .encabezado p {
+            color: #5c6a79;
+            margin-top: 8px;
+            font-size: 15px;
         }
 
-        /* Estilo de los botones */
-        .pestana {
-            padding: 12px 24px;
-            background-color: #e2e8f0;
-            color: #475569;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .pestana:hover {
-            background-color: #cbd5e1;
-        }
-
-        /* Estilo del botón seleccionado */
-        .pestana.activa {
-            background-color: #0073B7;
-            color: #ffffff;
-            box-shadow: 0 4px 6px rgba(0, 115, 183, 0.3);
-        }
-
-        /* Contenedor donde se muestra el gráfico */
-        .contenedor-visor {
-            width: 95%;
+        /* Cuadrícula para organizar los gráficos */
+        .dashboard-grid {
+            display: grid;
+            /* Crea dos columnas del mismo tamaño */
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
             max-width: 1200px;
-            margin: 30px auto;
-            height: 600px; /* Altura del visor */
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            overflow: hidden;
+            margin: 0 auto;
         }
 
+        /* Esta clase hace que el mapa ocupe las dos columnas enteras */
+        .mapa-completo {
+            grid-column: 1 / -1; 
+        }
+
+        /* Diseño de las tarjetas que contienen los gráficos */
+        .tarjeta {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .titulo-tarjeta {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eef0f2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Ajustes de los iframes para que carguen el HTML externo */
         iframe {
             width: 100%;
-            height: 100%;
             border: none;
+            border-radius: 4px;
+        }
+
+        /* Alturas personalizadas */
+        .iframe-alto { height: 500px; }
+        .iframe-medio { height: 380px; }
+
+        /* Adaptabilidad para pantallas pequeñas (celulares) */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr; /* Pasa a una sola columna */
+            }
         }
     </style>
 </head>
 <body>
 
     <header class="encabezado">
-        <h1>Panel de Incidentes</h1>
+        <h1>Incidentes</h1>
+        <p>Análisis de Expansión territorial y demografía</p>
     </header>
 
-    <nav class="menu-pestanas">
-        <button class="pestana activa" onclick="cambiarGrafico('graficos/mapa.html', this)">
-            🗺️ Mapa Interactivo
-        </button>
+    <main class="dashboard-grid">
         
-        <button class="pestana" onclick="cambiarGrafico('graficos/grafico_sexo.html', this)">
-            📊 Distribución por Sexo
-        </button>
-        
-        <button class="pestana" onclick="cambiarGrafico('graficos/tercer_grafico.html', this)">
-            📈 Tercer Gráfico
-        </button>
-    </nav>
+        <div class="tarjeta mapa-completo">
+            <div class="titulo-tarjeta">🗺️ Mapa Interactivo</div>
+            <iframe class="iframe-alto" src="graficos/mapa.html" title="Mapa de Incidentes"></iframe>
+        </div>
 
-    <main class="contenedor-visor">
-        <iframe id="visor-graficos" src="graficos/mapa.html" title="Visor de Datos"></iframe>
+        <div class="tarjeta">
+            <div class="titulo-tarjeta">📊 Distribución por Sexo</div>
+            <iframe class="iframe-medio" src="graficos/grafico_sexo.html" title="Distribución por Sexo"></iframe>
+        </div>
+
+        <div class="tarjeta">
+            <div class="titulo-tarjeta">📈 Tercer Gráfico</div>
+            <iframe class="iframe-medio" src="graficos/tercer_grafico.html" title="Tercer Gráfico"></iframe>
+        </div>
+
     </main>
-
-    <script>
-        function cambiarGrafico(rutaArchivo, botonSeleccionado) {
-            document.getElementById('visor-graficos').src = rutaArchivo;
-
-            const pestanas = document.querySelectorAll('.pestana');
-            pestanas.forEach(pestana => pestana.classList.remove('activa'));
-
-            botonSeleccionado.classList.add('activa');
-        }
-    </script>
 
 </body>
 </html>
