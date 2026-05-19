@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relevamiento</title>
+    <title>Pacientes en Situación de Calle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-
-            --body-bg: #f1f5f9;
-            --card-bg: #ffffff;
-            --header-bg: rgba(255, 255, 255, 0.85);
+            /* Modo Claro */
+            --body-bg: #f4f7fb; 
+            
+            /* Fondo con resplandor ambiental (Turquesa y Violeta) */
+            --bg-glow: radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 50%), 
+                       radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+            
+            --card-bg: rgba(255, 255, 255, 0.85); /* Ligeramente translúcido para el efecto cristal */
+            --header-bg: rgba(255, 255, 255, 0.75);
             --primary-text: #0f172a;
             --secondary-text: #64748b;
             --card-title-text: #1e293b;
             
-            --accent-color: #06b6d4; /* Turquesa */
-            --accent-gradient: linear-gradient(135deg, #8b5cf6, #06b6d4); /* Violeta a Turquesa */
+            --accent-color: #06b6d4; 
+            --accent-gradient: linear-gradient(135deg, #8b5cf6, #06b6d4); 
             
-            --iframe-placeholder-bg: #f8fafc;
-            --border-color: #e2e8f0;
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --iframe-placeholder-bg: rgba(248, 250, 252, 0.8);
+            --border-color: rgba(226, 232, 240, 0.8);
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            --card-hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             
             --border-radius: 16px;
             --grid-gap: 24px;
@@ -33,9 +38,14 @@
 
         body.dark-mode {
             /* Modo Oscuro */
-            --body-bg: #0b1121;
-            --card-bg: #1e293b;
-            --header-bg: rgba(30, 41, 59, 0.85);
+            --body-bg: #090e17; 
+            
+            /* Luces más intensas para el modo oscuro */
+            --bg-glow: radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 45%), 
+                       radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.15) 0%, transparent 45%);
+            
+            --card-bg: rgba(30, 41, 59, 0.65); /* Más transparente en oscuro para ver las luces */
+            --header-bg: rgba(15, 23, 42, 0.75);
             --primary-text: #f8fafc;
             --secondary-text: #94a3b8;
             --card-title-text: #e2e8f0;
@@ -43,12 +53,13 @@
             --accent-color: #22d3ee; 
             --accent-gradient: linear-gradient(135deg, #a78bfa, #22d3ee);
             
-            --iframe-placeholder-bg: #0f172a;
-            --border-color: #334155;
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
-            --card-hover-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            --iframe-placeholder-bg: rgba(15, 23, 42, 0.6);
+            --border-color: rgba(51, 65, 85, 0.6);
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
 
+        /* Scrollbar Personalizado */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--body-bg); }
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
@@ -57,6 +68,8 @@
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--body-bg);
+            background-image: var(--bg-glow); /* Aplicamos el resplandor */
+            background-attachment: fixed; /* El resplandor no se mueve al bajar */
             margin: 0;
             color: var(--primary-text);
             transition: background-color 0.4s ease, color 0.4s ease;
@@ -64,7 +77,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Encabezado con Glassmorphism */
         .encabezado {
             background-color: var(--header-bg);
             border-bottom: 1px solid var(--border-color);
@@ -73,8 +85,8 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             transition: background-color 0.4s ease, border-bottom 0.4s ease;
         }
 
@@ -130,6 +142,7 @@
             padding: 0;
             box-shadow: var(--card-shadow); 
             cursor: pointer;
+            backdrop-filter: blur(8px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -140,7 +153,6 @@
             box-shadow: var(--card-hover-shadow);
         }
 
-        /* Cuadrícula */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -152,7 +164,6 @@
 
         .mapa-completo { grid-column: 1 / -1; }
 
-        /* Tarjetas */
         .tarjeta {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -161,14 +172,20 @@
             box-shadow: var(--card-shadow);
             display: flex;
             flex-direction: column;
+            
+            /* Efecto cristal / Glassmorphism */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
             animation: fadeIn 0.6s ease-out forwards;
             opacity: 0;
         }
 
         .tarjeta:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             box-shadow: var(--card-hover-shadow);
+            border-color: rgba(6, 182, 212, 0.3); /* Un leve borde iluminado al pasar el mouse */
         }
 
         /* Animación en cascada para las tarjetas */
@@ -214,7 +231,9 @@
             border: 1px solid var(--border-color);
         }
 
-        /* Contenedores de iFrames */
+        /* =========================================
+           CONTENEDORES DE GRÁFICOS (IFRAMES)
+           ========================================= */
         iframe {
             width: 100%;
             border: 1px solid var(--border-color);
@@ -226,7 +245,9 @@
         .iframe-alto { height: 550px; }
         .iframe-medio { height: 420px; }
 
-        /* Adaptabilidad para móviles */
+        /* =========================================
+           RESPONSIVE (MÓVILES)
+           ========================================= */
         @media (max-width: 900px) {
             .encabezado { padding: 15px 20px; }
             
@@ -264,7 +285,7 @@
             </div>
 
             <div class="header-center">
-                <h1>Relevamiento</h1>
+                <h1>Pacientes en Situación de Calle</h1>
                 <p>Análisis de Expansión Territorial y Demografía</p>
             </div>
 
@@ -273,6 +294,7 @@
                     <svg id="icon-sun" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
+                <!-- Reemplaza el src con la ruta real de tu logo derecho -->
                 <img src="https://i.imgur.com/W5Mo4rc.png" alt="Logo Entidad" class="logo-right">
             </div>
 
@@ -319,9 +341,8 @@
             }
         }
 
-        // Cargar preferencia guardada
+        // Cargar preferencia guardada o detectar sistema operativo
         const savedTheme = localStorage.getItem('theme');
-        // Preferencia de sistema operativo si no hay nada guardado
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         
         if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
