@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Operativo de Incidentes</title>
+    <style>
+        /* Diseño general minimalista y moderno */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Encabezado limpio */
+        .encabezado {
+            background-color: #1a252f;
+            color: #ffffff;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .encabezado h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Contenedor de los 3 botones (pestañas) */
+        .menu-pestanas {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Estilo de los botones */
+        .pestana {
+            padding: 12px 24px;
+            background-color: #e2e8f0;
+            color: #475569;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .pestana:hover {
+            background-color: #cbd5e1;
+        }
+
+        /* Estilo del botón seleccionado */
+        .pestana.activa {
+            background-color: #0073B7;
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 115, 183, 0.3);
+        }
+
+        /* Contenedor donde se muestra el gráfico */
+        .contenedor-visor {
+            width: 95%;
+            max-width: 1200px;
+            margin: 30px auto;
+            height: 600px; /* Altura del visor */
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="encabezado">
+        <h1>Panel de Incidentes</h1>
+    </header>
+
+    <nav class="menu-pestanas">
+        <button class="pestana activa" onclick="cambiarGrafico('graficos/mapa.html', this)">
+            🗺️ Mapa Interactivo
+        </button>
+        
+        <button class="pestana" onclick="cambiarGrafico('graficos/grafico_sexo.html', this)">
+            📊 Distribución por Sexo
+        </button>
+        
+        <button class="pestana" onclick="cambiarGrafico('graficos/tercer_grafico.html', this)">
+            📈 Tercer Gráfico
+        </button>
+    </nav>
+
+    <main class="contenedor-visor">
+        <iframe id="visor-graficos" src="graficos/mapa.html" title="Visor de Datos"></iframe>
+    </main>
+
+    <script>
+        function cambiarGrafico(rutaArchivo, botonSeleccionado) {
+            document.getElementById('visor-graficos').src = rutaArchivo;
+
+            const pestanas = document.querySelectorAll('.pestana');
+            pestanas.forEach(pestana => pestana.classList.remove('activa'));
+
+            botonSeleccionado.classList.add('activa');
+        }
+    </script>
+
+</body>
+</html>
