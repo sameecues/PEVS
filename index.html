@@ -9,9 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Definición de Variables CSS para Temas */
         :root {
-            /* Tema Claro (Por Defecto) */
             --body-bg: #f8fafc;
             --card-bg: #ffffff;
             --header-bg: #ffffff;
@@ -24,14 +22,12 @@
             --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             --header-border: 1px solid #e2e8f0;
             
-            /* Ajustes Generales */
             --border-radius: 12px;
             --grid-gap: 30px;
             --main-max-width: 1300px;
         }
 
         body.dark-mode {
-            /* Tema Oscuro */
             --body-bg: #0f172a;
             --card-bg: #1e293b;
             --header-bg: #1e293b;
@@ -45,7 +41,6 @@
             --header-border: none;
         }
 
-        /* Estilos Generales Modernos */
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--body-bg);
@@ -55,7 +50,7 @@
             overflow-x: hidden;
         }
 
-        /* Estilos del Encabezado con Logos y Botón */
+        /* Encabezado */
         .encabezado {
             background-color: var(--header-bg);
             border-bottom: var(--header-border);
@@ -78,16 +73,12 @@
             gap: 20px;
         }
 
-        .logo-left,
-        .logo-right {
-            height: 50px; /* Tamaño normal para el encabezado */
+        .logo-left, .logo-right {
+            height: 50px;
             width: auto;
         }
 
-        .text-container {
-            display: flex;
-            flex-direction: column;
-        }
+        .text-container { display: flex; flex-direction: column; }
 
         .header-content h1 {
             margin: 0;
@@ -110,24 +101,30 @@
             gap: 30px;
         }
 
-        /* Estilos del Botón de Modo */
-        .theme-toggle {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
+        /* === NUEVO BOTÓN REDONDO DE TEMA === */
+        .btn-theme-toggle {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary-text);
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            width: 44px; 
+            height: 44px; 
+            border-radius: 50%; 
+            padding: 0;
+            box-shadow: var(--card-shadow); 
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .theme-toggle:hover {
-            opacity: 0.8;
+        .btn-theme-toggle:hover { 
+            border-color: var(--accent-color); 
+            color: var(--accent-color); 
+            transform: scale(1.1); 
         }
 
-        /* Cuadrícula del Dashboard */
+        /* Cuadrícula */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -137,12 +134,8 @@
             padding: 0 20px 40px;
         }
 
-        /* El mapa ocupa todo el ancho */
-        .mapa-completo {
-            grid-column: 1 / -1; 
-        }
+        .mapa-completo { grid-column: 1 / -1; }
 
-        /* Diseño Moderno de las Tarjetas */
         .tarjeta {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
@@ -168,7 +161,6 @@
             gap: 10px;
         }
 
-        /* Ajustes de los iframes */
         iframe {
             width: 100%;
             border: none;
@@ -177,27 +169,13 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Alturas personalizadas */
         .iframe-alto { height: 550px; }
         .iframe-medio { height: 400px; }
 
-        /* Adaptabilidad para pantallas pequeñas (celulares) */
         @media (max-width: 900px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-
-            .logo-title-group {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-                padding: 0 15px 30px;
-            }
+            .header-content { flex-direction: column; gap: 20px; text-align: center; }
+            .logo-title-group { flex-direction: column; gap: 10px; }
+            .dashboard-grid { grid-template-columns: 1fr; padding: 0 15px 30px; }
         }
     </style>
 </head>
@@ -213,16 +191,17 @@
                 </div>
             </div>
             <div class="toggle-group">
-                <button class="theme-toggle" id="theme-toggle">
-                    Claro / Oscuro
+                <button id="theme-toggle" class="btn-theme-toggle" aria-label="Cambiar tema" title="Modo Claro / Oscuro">
+                    <svg id="icon-sun" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
+
                 <img src="https://i.imgur.com/W5Mo4rc.png" alt="Logo Derecha" class="logo-right">
             </div>
         </div>
     </header>
 
     <main class="dashboard-grid">
-        
         <div class="tarjeta mapa-completo">
             <div class="titulo-tarjeta">🗺️ Mapa Interactivo</div>
             <iframe class="iframe-alto" src="graficos/mapa.html" title="Mapa de Incidentes"></iframe>
@@ -237,31 +216,40 @@
             <div class="titulo-tarjeta">📈 Tercer Gráfico</div>
             <iframe class="iframe-medio" src="graficos/tercer_grafico.html" title="Tercer Gráfico"></iframe>
         </div>
-
     </main>
 
     <script>
         const body = document.body;
         const themeToggle = document.getElementById('theme-toggle');
+        const iconSun = document.getElementById('icon-sun');
+        const iconMoon = document.getElementById('icon-moon');
+        function updateIcons() {
+            if (body.classList.contains('dark-mode')) {
+                iconSun.style.display = 'block';
+                iconMoon.style.display = 'none';
+            } else {
+                iconSun.style.display = 'none';
+                iconMoon.style.display = 'block';
+            }
+        }
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }   
+
+        updateIcons();
 
         themeToggle.addEventListener('click', () => {
-            // Alternar la clase 'dark-mode' en el body
             body.classList.toggle('dark-mode');
+            updateIcons();
 
-            // Guardar la preferencia en localStorage
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
             } else {
                 localStorage.setItem('theme', 'light');
             }
         });
-
-        // Comprobar localStorage al cargar la página para aplicar el tema guardado
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-        }
     </script>
-
 </body>
 </html>
